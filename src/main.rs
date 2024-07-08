@@ -25,8 +25,10 @@ fn main() -> io::Result<()> {
 
     // Deliberate out-of-bounds access (unsafe)
     if buffer.len() >= 100 {
-        // Introduce a bug: accessing buffer beyond its length
-        let _crash_trigger = buffer[buffer.len() + 100]; // Cause an out-of-bounds access
+        // Introduce a hang: infinite loop
+        while true {
+            buffer.push(0)
+        }
     }
 
     println!("Buffer content: {}", String::from_utf8_lossy(&buffer));
